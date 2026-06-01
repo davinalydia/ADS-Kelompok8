@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String
 from app.database.connection import Base
 
+
 class User(Base):
     __tablename__ = "users"
 
@@ -10,4 +11,17 @@ class User(Base):
     email = Column(String, unique=True, nullable=False)
     password = Column(String, nullable=False)
 
-    role = Column(String, nullable=False)
+    role = Column(
+        String,
+        nullable=False,
+        default="mahasiswa"
+    )
+
+    def is_admin(self):
+        return self.role == "admin"
+
+    def is_dosen(self):
+        return self.role == "dosen"
+
+    def is_mahasiswa(self):
+        return self.role == "mahasiswa"

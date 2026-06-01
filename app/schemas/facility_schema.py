@@ -1,18 +1,20 @@
 from pydantic import BaseModel
 
-class FacilityCreate(BaseModel):
+
+class FacilityBase(BaseModel):
     name: str
     location: str
     capacity: int
     status: str = "available"
+    image_url: str | None = None
 
 
-class FacilityResponse(BaseModel):
+class FacilityCreate(FacilityBase):
+    pass
+
+
+class FacilityResponse(FacilityBase):
     id: int
-    name: str
-    location: str
-    capacity: int
-    status: str
 
     class Config:
         from_attributes = True

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-
+from app.database.connection import get_db
 from app.database.connection import SessionLocal
 
 from app.schemas.booking_schema import (
@@ -19,14 +19,6 @@ router = APIRouter(
     prefix="/bookings",
     tags=["Bookings"]
 )
-
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 @router.post("/", response_model=BookingResponse)
