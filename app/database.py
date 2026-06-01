@@ -1,14 +1,7 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base, sessionmaker
-import os
+from sqlalchemy.orm import sessionmaker, declarative_base
 
-# DATABASE
-DATABASE_URL = "sqlite:///./campus_booking.db"
-
-print(
-    "DATABASE PATH =",
-    os.path.abspath("campus_booking.db")
-)
+DATABASE_URL = "sqlite:///./db.sqlite3"
 
 engine = create_engine(
     DATABASE_URL,
@@ -23,12 +16,9 @@ SessionLocal = sessionmaker(
 
 Base = declarative_base()
 
-
 def get_db():
     db = SessionLocal()
-
     try:
         yield db
-
     finally:
         db.close()
