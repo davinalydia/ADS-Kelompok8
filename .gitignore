@@ -5,3 +5,5 @@ venv/
 .venv/
 
 campus_booking.db
+config.bat
+node_modules
